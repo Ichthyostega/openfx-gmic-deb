@@ -1,2 +1,3 @@
 0001-Setup-CMake-build.patch
+0002-CMake-OpenGL-GLVND-compatibility.patch
 Plugin-path-OFX.patch

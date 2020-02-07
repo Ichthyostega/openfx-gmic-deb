@@ -1,0 +1,50 @@
+From: Ichthyostega <prg@ichthyostega.de>
+Date: Fri, 7 Feb 2020 03:34:05 +0100
+Subject: CMake: OpenGL GLVND compatibility
+
+Linux systems are gradually switching to the GLVND ABI;
+thus we might switch to the compatibility mechanism provided by CMake,
+which boils down to using the OPENGL_LIBRARIES variable and to declare
+explicitly that we prefer GLVND when available
+
+https://cmake.org/cmake/help/v3.11/policy/CMP0072.html
+https://cmake.org/cmake/help/v3.11/module/FindOpenGL.html#linux-specific
+---
+ CMakeLists.txt | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index de86115..576bfd6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -28,6 +28,13 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
+ PROJECT(OpenFXGMIC CXX)
+ ENABLE_TESTING()
+ 
++# Require OpenGL
++if(POLICY CMP0072)
++    # prefer GLVND ABI. We use the compatibility via OPENGL_LIBRARIES variable
++    # see https://cmake.org/cmake/help/v3.11/policy/CMP0072.html
++    # see https://cmake.org/cmake/help/v3.11/module/FindOpenGL.html#linux-specific
++    cmake_policy(SET CMP0072 NEW)
++endif()
+ include(FindOpenGL REQUIRED)
+ 
+ set (CMAKE_CXX_STANDARD 11)
+@@ -108,12 +115,14 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD" OR ${CMAKE_SYSTEM_NAME} STREQUAL
+ endif()
+ 
+ TARGET_COMPILE_DEFINITIONS(GMIC PRIVATE OFX_EXTENSIONS_NUKE OFX_EXTENSIONS_NATRON NOMINMAX OFX_PLUGIN gmic_build gmic_is_parallel cimg_use_abort cimg_display=0 cimg_appname=\"gmic\" cimg_namespace_suffix=openfx_gmic cimg_verbosity=0 cimg_library=cimg_library_openfx_gmic)
+-#TARGET_LINK_LIBRARIES(GMIC Support ${OPENGL_gl_LIBRARY})
+-TARGET_LINK_LIBRARIES(GMIC ${OPENGL_gl_LIBRARY})
+ 
+ # Depend on shared Gmic library installed into the (Debian) system
+ TARGET_LINK_LIBRARIES(GMIC gmic)
+ 
++# use compatibiltiy/legacy ABI also on systems based on GLVND
++TARGET_LINK_LIBRARIES(GMIC ${OPENGL_LIBRARIES})
++#TARGET_LINK_LIBRARIES(GMIC ${OPENGL_gl_LIBRARY})
++
+ # Find OpenMP
+ # To compile on homebrew:
+ # env CXX=/usr/local/opt/llvm/bin/clang++ CC=/usr/local/opt/llvm/bin/clang LDFLAGS=-L/usr/local/opt/llvm/lib cmake ..
