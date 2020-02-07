@@ -1,6 +1,10 @@
-openfx-gmic-natron (2.3.15~rc14+libs-1~buster) Lumiera-buster-tool; urgency=low
+openfx-gmic (2.3.15~rc14+libs-1~buster) Lumiera-buster-tool; urgency=low
 
   * Initial debinisation.
+  * packaged with git-buildpackage including git-submodules (OpenFX).
+  * provide missing sources from Gmic via debian/patches (gmic_libc.h|cpp)
+  * build via CMake and link against shared Gmic installed on the system
+  * Rebuild for use on Debian/Buster(stable).
 
  -- Hermann Vosseler <deb@ichthyostega.de>  Fri, 7 Feb 2020 01:23:55 +0100
 

@@ -1,10 +1,10 @@
-Source: openfx-gmic-natron
+Source: openfx-gmic
 Section: video
 Priority: optional
 Maintainer: Hermann Vosseler <deb@ichthyostega.de>
 Vcs-Git: https://github.com/Ichthyostega/openfx-gmic-deb -b deb
-Homepage: https://github.com/NatronGitHub/openfx-misc
-Standards-Version: 3.9.8
+Homepage: https://github.com/NatronGitHub/openfx-gmic
+Standards-Version: 4.5.0
 Build-Depends: debhelper (>= 11~),
 	libgmic-dev (>= 2.8.2),
 	libgl1-mesa-dev,
@@ -12,7 +12,7 @@ Build-Depends: debhelper (>= 11~),
 	pkg-config,
 	cmake
 
-Package: openfx-gmic-natron
+Package: openfx-gmic
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: use G'mic as OpenFX plugin
