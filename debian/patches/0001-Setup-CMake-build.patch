@@ -1,0 +1,77 @@
+From: Ichthyostega <prg@ichthyostega.de>
+Date: Fri, 7 Feb 2020 03:28:40 +0100
+Subject: Setup CMake build
+
+- adjust the upstream CMakeLists.txt to match the build
+  as defined through the plain Makefiles shipped in-tree.
+  Judging from the Git history, those Makefiles are more
+  frequently updated; however for packaging I prefer a CMake
+  build, which is easier to understand and simpler to maintain.
+
+- change the build to link against a shared Gmic library,
+  installed properly to the system through a dedicated DEB
+  package, on which this package will depend.
+---
+ CMakeLists.txt | 21 ++++++---------------
+ 1 file changed, 6 insertions(+), 15 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 886a96d..de86115 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -54,7 +54,6 @@ endif()
+ 
+ # C++ Include directories
+ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/SupportExt)
+ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/Helpers)
+ INCLUDE_DIRECTORIES(${OPENFX_PATH}/include)
+ INCLUDE_DIRECTORIES(${OPENFX_PATH}/Examples/include)
+@@ -74,15 +73,6 @@ set(OFX_SUPPORT_LIBRARY_DIR "${OPENFX_PATH}/Support/Library")
+ 
+ FILE(GLOB SUPPORT_SOURCES
+     "${OFX_SUPPORT_HEADER_DIR}/*.h"
+-
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsCore.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsImageEffect.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsInteract.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsLog.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsMultiThread.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsParams.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsProperty.cpp"
+-    "${OFX_SUPPORT_LIBRARY_DIR}/ofxsPropertyValidation.cpp"
+     "${OFX_SUPPORT_LIBRARY_DIR}/*.h"
+ )
+ 
+@@ -90,10 +80,8 @@ FILE(GLOB SUPPORT_SOURCES
+ #TARGET_COMPILE_DEFINITIONS(Support PRIVATE OFX_SUPPORTS_OPENGLRENDER OFX_EXTENSIONS_TUTTLE OFX_EXTENSIONS_NUKE OFX_EXTENSIONS_NATRON OFX_EXTENSIONS_VEGAS NOMINMAX)
+ 
+ FILE(GLOB GMIC_SOURCES
+-  "CImg.h"
+-  "gmic.cpp"
+-  "gmic.h"
+-  "gmic_stdlib.h"
++  "gmic_plugin.cpp"
++  "Helpers/gmic_parser.cpp"
+   "Helpers/RFX_FileUtils.cpp"
+   "Helpers/RFX_StringUtils.cpp"
+   "Helpers/*h"
+@@ -123,6 +111,9 @@ TARGET_COMPILE_DEFINITIONS(GMIC PRIVATE OFX_EXTENSIONS_NUKE OFX_EXTENSIONS_NATRO
+ #TARGET_LINK_LIBRARIES(GMIC Support ${OPENGL_gl_LIBRARY})
+ TARGET_LINK_LIBRARIES(GMIC ${OPENGL_gl_LIBRARY})
+ 
++# Depend on shared Gmic library installed into the (Debian) system
++TARGET_LINK_LIBRARIES(GMIC gmic)
++
+ # Find OpenMP
+ # To compile on homebrew:
+ # env CXX=/usr/local/opt/llvm/bin/clang++ CC=/usr/local/opt/llvm/bin/clang LDFLAGS=-L/usr/local/opt/llvm/lib cmake ..
+@@ -205,7 +196,7 @@ ELSE()
+     DESTINATION GMIC.ofx.bundle/Contents/Resources
+   )
+ 
+-  INSTALL(FILES Info.plist
++  INSTALL(FILES GMIC_OFX/Info.plist
+     DESTINATION GMIC.ofx.bundle/Contents
+   )
+ 
