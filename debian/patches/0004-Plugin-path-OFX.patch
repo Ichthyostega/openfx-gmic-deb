@@ -1,0 +1,43 @@
+From: Ichthyostega <prg@ichthyostega.de>
+Date: Fri, 7 Feb 2020 04:20:00 +0100
+Subject: Plugin path OFX
+
+Adjust installation target for the generated OpenFX plugin.
+According to Filesystem-Hierarchy-Standard, these go into /user/lib/...
+---
+ CMakeLists.txt | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 5b625e1..f15dc38 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -51,6 +51,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+     set (CMAKE_C_FLAGS_RELEASE   "-Wall -Wextra -Ofast -DNDEBUG")
+ endif()
+ SET(OPENFX_PATH ${CMAKE_CURRENT_SOURCE_DIR}/openfx)
++option(OFX_PLUGIN_PATH "Subdir of destination to install the plugin bundle" "")
+ 
+ # Check that submodule have been initialized and updated
+ if(NOT EXISTS ${PROJECT_SOURCE_DIR}/openfx/include)
+@@ -203,16 +204,16 @@ IF("${OFX_ARCH_NAME}" EQUAL "UNKNOWN")
+   MESSAGE(SEND_ERROR "OFX_ARCH_NAME was not detected. Install targets will be unavailable. See http://openeffects.org/documentation/reference/ch02s02.html to pick an arch name.")
+ ELSE()
+   INSTALL(TARGETS GMIC
+-    RUNTIME DESTINATION GMIC.ofx.bundle/Contents/${OFX_ARCH_NAME}
+-    LIBRARY DESTINATION GMIC.ofx.bundle/Contents/${OFX_ARCH_NAME}
++    RUNTIME DESTINATION ${OFX_PLUGIN_PATH}/GMIC.ofx.bundle/Contents/${OFX_ARCH_NAME}
++    LIBRARY DESTINATION ${OFX_PLUGIN_PATH}/GMIC.ofx.bundle/Contents/${OFX_ARCH_NAME}
+   )
+ 
+   INSTALL(FILES ${GMIC_RESOURCES}
+-    DESTINATION GMIC.ofx.bundle/Contents/Resources
++    DESTINATION ${OFX_PLUGIN_PATH}/GMIC.ofx.bundle/Contents/Resources
+   )
+ 
+   INSTALL(FILES GMIC_OFX/Info.plist
+-    DESTINATION GMIC.ofx.bundle/Contents
++    DESTINATION ${OFX_PLUGIN_PATH}/GMIC.ofx.bundle/Contents
+   )
+ 
+   IF("${OFX_ARCH_NAME}" EQUAL "Win32" OR "${OFX_ARCH_NAME}" EQUAL "Win64")

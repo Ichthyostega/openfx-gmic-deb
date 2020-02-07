@@ -1,4 +1,4 @@
 0001-Setup-CMake-build.patch
 0002-CMake-OpenGL-GLVND-compatibility.patch
 0003-provide-C-bridge-to-the-Gmic-library.patch
-Plugin-path-OFX.patch
+0004-Plugin-path-OFX.patch
