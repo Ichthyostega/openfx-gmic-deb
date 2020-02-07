@@ -1,0 +1,89 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: openfx-gmic
+Source: https://github.com/NatronGitHub/openfx-gmic
+        Upstream releases by tagging a git tree; however, the upstream repo
+        also includes git submodule(s), which we package into the "tarball"
+        - ./openfx https://github.com/NatronGitHub/openfx.git
+
+
+Files: *
+Copyright: 2016 Tobias Fleischer / reduxFX Productions (http://www.reduxfx.com)
+           2008-2012 David Tschumperlé <David.Tschumperle@greyc.ensicaen.fr>
+License: CeCILL-dual
+
+Files: libs/OpenFX/*
+Copyright: 2011-2014 Nikhil Marathe <nsm.nikhil@gmail.com>
+License: BSD-Openfx
+
+
+Files: debian/*
+Copyright: 2020 Hermann Vosseler <deb@ichthyostega.de>
+License: GPL-2+
+
+
+License: CeCILL-dual
+ This project is 'dual-licensed', you have to choose one of the two licenses
+ below to apply. The full license text is provided in the accompanying files
+ - Licence_CeCILL-C_V1-en.txt
+ - Licence_CeCILL_V2-en.txt
+ .
+ CeCILL-C
+ The CeCILL-C license is close to the GNU LGPL.
+ http://www.cecill.info/licences/Licence_CeCILL-C_V1-en.html
+ .
+ or
+ .
+ CeCILL v2.0
+ The CeCILL license is compatible with the GNU GPL.
+ http://www.cecill.info/licences/Licence_CeCILL_V2-en.html
+
+
+
+License: GPL-2+
+ This package is free software; you can redistribute it and/or modify it
+ under the terms of the GNU General Public License as published by the Free
+ Software Foundation; either version 2 of the License, or (at your option)
+ any later version.
+ .
+ This package is distributed in the hope that it will be useful, but WITHOUT
+ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ more details.
+ .
+ You should have received a copy of the GNU General Public License along
+ with this program. If not, see <https://www.gnu.org/licenses/>
+ .
+ On Debian systems, the complete text of the GNU General Public License
+ version 2 can be found in "/usr/share/common-licenses/GPL-2".
+
+
+
+License: BSD-Openfx
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+ .
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ * Neither the name The Open Effects Association Ltd, nor the names of its 
+   contributors may be used to endorse or promote products derived from this
+   software without specific prior written permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ .
+ The Open Effects Association Ltd
+ 1 Wardour St
+ London W1D 6PA
+ England
+

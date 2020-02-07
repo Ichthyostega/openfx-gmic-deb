@@ -1,0 +1,30 @@
+Source: openfx-gmic-natron
+Section: video
+Priority: optional
+Maintainer: Hermann Vosseler <deb@ichthyostega.de>
+Vcs-Git: https://github.com/Ichthyostega/openfx-gmic-deb -b deb
+Homepage: https://github.com/NatronGitHub/openfx-misc
+Standards-Version: 3.9.8
+Build-Depends: debhelper (>= 11~),
+	libgmic-dev (>= 2.8.2),
+	libgl1-mesa-dev,
+	libomp-dev,
+	pkg-config,
+	cmake
+
+Package: openfx-gmic-natron
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: use G'mic as OpenFX plugin
+ This plugin package relates to Natron, yet can be used with other OpenFX
+ hosts as well (e.g. The Foundry's Nuke, Sony Vegas). G'mic itself is an
+ image processing scripting language, providing an open and feature-rich
+ framework for image processing, conversion, visualisation of datasets,
+ from 1d scalar signals to 3d+t sequences of multi-spectral volumetric
+ images.
+ .
+ WARNING: This is a very early test release, use at your own risk!
+ Expect crashes and weird behaviour. Feel free to report any errors you
+ encounter, but be aware that this is pretty much still a proof-of-concept 
+ prototype interface.
+

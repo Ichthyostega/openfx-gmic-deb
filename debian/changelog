@@ -1,0 +1,6 @@
+openfx-gmic-natron (2.3.15~rc14+libs-1~buster) Lumiera-buster-tool; urgency=low
+
+  * Initial debinisation.
+
+ -- Hermann Vosseler <deb@ichthyostega.de>  Fri, 7 Feb 2020 01:23:55 +0100
+
