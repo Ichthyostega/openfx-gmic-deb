@@ -1,3 +1,11 @@
+openfx-gmic (2.3.15+libs-1~buster) Lumiera-buster-tool; urgency=low
+
+  * Corresponding to Natron Release 2.3.15.
+  * Note: limited G'mic compatibility. G'mic 2.9 breaks configuration
+  * Rebuild for use on Debian/Buster(stable)
+
+ -- Hermann Vosseler <deb@ichthyostega.de>  Sat, 14 Nov 2020 23:13:21 +0100
+
 openfx-gmic (2.3.15~rc14+libs-1~buster) Lumiera-buster-tool; urgency=low
 
   * Initial debinisation.
