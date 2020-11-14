@@ -6,7 +6,7 @@ Vcs-Git: https://github.com/Ichthyostega/openfx-gmic-deb -b deb
 Homepage: https://github.com/NatronGitHub/openfx-gmic
 Standards-Version: 4.5.0
 Build-Depends: debhelper (>= 11~),
-	libgmic-dev (>= 2.8.2),
+	libgmic-dev (>= 2.8.4~), libgmic-dev (<< 2.9~),
 	libgl1-mesa-dev,
 	libomp-dev,
 	pkg-config,
